@@ -1,4 +1,11 @@
 /**
+ * @typedef {Object} ButtonSettings
+ * @property {string} buttonTitle - button title
+ * @property {string} buttonLabel - label
+ * @property {string} callbackOrUrl - callback or Url for button
+ */
+
+/**
  * 문서 메뉴에 버튼을 추가하는 기능을 추가합니다.
  *
  * @class AddArticleButtons
@@ -17,11 +24,11 @@ class AddArticleButtons {
     /**
      * Add Button
      *
-     * @param {string} buttontitle
-     * @param {string} buttonname
+     * @param {string} buttonTitle
+     * @param {string} buttonLabel
      * @param {string|function} callbackOrUrl
      */
-    AddItem (buttontitle, buttonname, callbackOrUrl) {
+    AddItem (buttonTitle, buttonLabel, callbackOrUrl) {
         let newItem = this.menuitem.cloneNode(true);
         this.menuitem.after(newItem);
 
@@ -32,10 +39,10 @@ class AddArticleButtons {
             newItem = linkItem;
         }
 
-        newItem.innerHTML = buttonname;
+        newItem.innerHTML = buttonLabel;
         newItem.accessKey = '';
         newItem.style.cursor = 'pointer';
-        newItem.title = buttontitle;
+        newItem.title = buttonTitle;
 
         
         try {
@@ -46,6 +53,19 @@ class AddArticleButtons {
             return;
         }
     };
+
+    /**
+     * 
+     * @param {Array<ButtonSettings>} objects 
+     */
+    AddItems (objects) {
+        if (objects.length) {
+            for (let index = 0; index < objects.length; index++) {
+                const element = objects[index];
+                AddItem(element.buttonTitle, element.buttonLabel, element.callbackOrUrl)
+            }
+        }
+    }
 }
 
 
