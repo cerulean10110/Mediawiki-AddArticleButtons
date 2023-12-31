@@ -67,6 +67,7 @@ class AddArticleButtons {
     }
 }
 
+if (!mw.config.get('wgIsArticle')) return;
 
 /**
  * ArticleButton Selector
