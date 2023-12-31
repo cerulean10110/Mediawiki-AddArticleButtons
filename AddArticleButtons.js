@@ -34,7 +34,7 @@ class AddArticleButtons {
 
         if (newItem.nodeName != "A") {
             newItem.innerHTML = "";
-            let linkItem = document.createElement('a');
+            const linkItem = document.createElement('a');
             newItem.append(linkItem);
             newItem = linkItem;
         }
@@ -60,8 +60,7 @@ class AddArticleButtons {
      */
     AddItems (objects) {
         if (objects.length) {
-            for (let index = 0; index < objects.length; index++) {
-                const element = objects[index];
+            for (const element of objects) {
                 AddItem(element.buttonTitle, element.buttonLabel, element.callbackOrUrl)
             }
         }
@@ -72,7 +71,7 @@ class AddArticleButtons {
 /**
  * ArticleButton Selector
  */
-var skinContentTool = {
+let skinContentTool = {
     ['liberty']: ".content-tools .dropdown-item:last-child",
     ['timeless']: ".mw-portlet-body #ca-move.mw-list-item"
 };
