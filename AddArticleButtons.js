@@ -66,15 +66,15 @@ class AddArticleButtons {
     }
 }
 
-if (mw.config.get('wgIsArticle')) {
+{
     /**
      * ArticleButton Selector
      */
-    let skinContentTool = {
+    const skinContentTool = {
         ['liberty']: ".content-tools .dropdown-item:last-child",
         ['timeless']: ".mw-portlet-body #ca-move.mw-list-item"
     };
 
     window.extendedArticleButtons = new AddArticleButtons(skinContentTool[mw.config.get('skin')]);
-}
 
+}
