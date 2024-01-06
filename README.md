@@ -4,16 +4,16 @@ This script add some functions to article tools.
 
 * Add This Line to common.js or gadget of your wiki.
 ```javascript
+// common.js or gadget js
 mw.loader.getScript('https://cdn.jsdelivr.net/gh/cerulean10110/Mediawiki-AddArticleButtons@main/AddArticleButtons.js');
-```
-* And, You can add some function or url you want. Each user should add the code like below to their common.js.
 
-example (common)
-```javascript
-mw.loader.load('/index.php?title=User:(Your wikiuser Name)/addArticleMenuItem-func.js&action=raw&ctype=text/javascript');
+jQuery( document ).ready( function() {
+    mw.loader.load('https://examplewiki.com/w/index.php?title=User:Your_wikiuser_Name/addArticleButtons-func.js&action=raw&ctype=text/javascript');
+});
 ```
+* And, You can add some function or url you want. Each user should add the code like below to user's [addArticleButtons-func.js](https://examplewiki.com/w/index.php?title=User:Your_wikiuser_Name/addArticleButtons-func.js&action=edit).
 
-example (functions or urls you want)
+example
 ```javascript
 // url
 // AddItem(buttonLabel, buttonTitle, urlstring)
