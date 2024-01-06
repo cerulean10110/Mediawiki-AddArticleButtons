@@ -22,13 +22,13 @@ class AddArticleButtons {
     }
 
     /**
-     * Add Button
+     * Add Button Item
      *
-     * @param {string} buttonTitle
-     * @param {string} buttonLabel
-     * @param {string|function} callbackOrUrl
+     * @param {string} buttonLabel button name
+     * @param {string} buttonTitle button tooltip
+     * @param {string|function} callbackOrUrl your function or url
      */
-    AddItem (buttonTitle, buttonLabel, callbackOrUrl) {
+    AddItem(buttonLabel, buttonTitle, callbackOrUrl) {
         let newItem = this.menuitem.cloneNode(true);
         this.menuitem.after(newItem);
 
@@ -57,7 +57,7 @@ class AddArticleButtons {
      * 
      * @param {Array<ButtonSettings>} objects 
      */
-    AddItems (objects) {
+    AddItems(objects) {
         if (objects.length) {
             for (const element of objects) {
                 AddItem(element.buttonTitle, element.buttonLabel, element.callbackOrUrl)
@@ -74,7 +74,7 @@ if (mw.config.get('wgIsArticle')) {
         ['liberty']: ".content-tools .dropdown-item:last-child",
         ['timeless']: ".mw-portlet-body #ca-move.mw-list-item"
     };
-    
+
     window.extendedArticleButtons = new AddArticleButtons(skinContentTool[mw.config.get('skin')]);
 }
 

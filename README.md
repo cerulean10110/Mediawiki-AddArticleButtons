@@ -15,7 +15,8 @@ mw.loader.load('/index.php?title=User:(Your wikiuser Name)/addArticleMenuItem-fu
 
 example (functions or urls you want)
 ```javascript
-/// url
+// url
+// AddItem(buttonLabel, buttonTitle, urlstring)
 if (mw.config.get('wgPageContentModel') == 'wikitext') {
 
     let veLink = new URL(location);
@@ -23,7 +24,8 @@ if (mw.config.get('wgPageContentModel') == 'wikitext') {
 
     window.extendedArticleButtons.AddItem('Visual Editor', 'Visual Editor', veLink.toString());
 }
-/// function
+// function
+// AddItem(buttonLabel, buttonTitle, function)
 window.extendedArticleButtons.AddItem('hello world', 'hello world', function() {
 	alert("hello world");
 });
