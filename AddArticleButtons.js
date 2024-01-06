@@ -40,15 +40,14 @@ class AddArticleButtons {
         }
 
         newItem.innerHTML = buttonLabel;
-        newItem.accessKey = '';
-        newItem.style.cursor = 'pointer';
         newItem.title = buttonTitle;
+        newItem.style.cursor = 'pointer';
+        newItem.accessKey = '';
 
-        
         try {
-            newItem.href = new URL(callbackOrUrl);
+            newItem.href = new URL(callbackOrUrl); // 'If URL is valid'
         } catch (e) {
-            newItem.href = 'javascript:;'; // 'Invalid URL'
+            newItem.href = 'javascript:;'; // 'If URL is inValid'
             newItem.onclick = callbackOrUrl;
             return;
         }
@@ -67,14 +66,15 @@ class AddArticleButtons {
     }
 }
 
-if (!mw.config.get('wgIsArticle')) return;
+if (mw.config.get('wgIsArticle')) {
+    /**
+     * ArticleButton Selector
+     */
+    let skinContentTool = {
+        ['liberty']: ".content-tools .dropdown-item:last-child",
+        ['timeless']: ".mw-portlet-body #ca-move.mw-list-item"
+    };
+    
+    window.extendedArticleButtons = new AddArticleButtons(skinContentTool[mw.config.get('skin')]);
+}
 
-/**
- * ArticleButton Selector
- */
-let skinContentTool = {
-    ['liberty']: ".content-tools .dropdown-item:last-child",
-    ['timeless']: ".mw-portlet-body #ca-move.mw-list-item"
-};
-
-window.extendedArticleButtons = new AddArticleButtons(skinContentTool[mw.config.get('skin')]);
