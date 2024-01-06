@@ -4,7 +4,7 @@ This script add some functions to article tools.
 
 * Add This Line to common.js or gadget of your wiki.
 ```javascript
-mw.loader.getScript('https://cdn.jsdelivr.net/gh/cerulean10110/Mediawiki-AddArticleButtons/AddArticleButtons.js');
+mw.loader.getScript('https://cdn.jsdelivr.net/gh/cerulean10110/Mediawiki-AddArticleButtons@main/AddArticleButtons.js');
 ```
 * And, You can add some function or url you want. Each user should add the code like below to their common.js.
 
