@@ -12,7 +12,7 @@
  *
  * @class AddArticleButtons
  */
-class AddArticleButtons {
+class AddArticleButtons2 {
     /**
      * @param {string} cssSelector
      */
@@ -49,13 +49,14 @@ class AddArticleButtons {
      * @param {ButtonConfigs} buttonConfigs button configs
      */
     AddItem(buttonConfigs) {
-        let newItem = this.DuplicateButton(this.menuitem, buttonConfigs.buttonLabel, buttonConfigs.buttonTitle);
-
+        
         if (buttonConfigs.namespaces && !buttonConfigs.namespaces.includes(mw.config.get('wgCanonicalNamespace')))
             return;
-
+        
         if (buttonConfigs.contentModel && buttonConfigs.contentModel != mw.config.get('wgPageContentModel'))
             return;
+        
+        let newItem = this.DuplicateButton(this.menuitem, buttonConfigs.buttonLabel, buttonConfigs.buttonTitle);
 
         try { // 'URL is valid.'
             newItem.href = new URL(buttonConfigs.callbackOrUrl);
@@ -88,6 +89,6 @@ class AddArticleButtons {
         ['timeless']: ".mw-portlet-body #ca-move.mw-list-item"
     };
 
-    window.extendedArticleButtons = new AddArticleButtons(skinContentTool[mw.config.get('skin')]);
+    window.extendedArticleButtons = new AddArticleButtons2(skinContentTool[mw.config.get('skin')]);
 
 }
