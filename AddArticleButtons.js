@@ -49,7 +49,7 @@ class AddArticleButtons {
      * @param {ButtonConfigs} buttonConfigs button configs
      */
     AddItem(buttonConfigs) {
-        let newItem = DuplicateButton(this.menuitem);
+        let newItem = this.DuplicateButton(this.menuitem);
 
         if (buttonConfigs.namespaces && !buttonConfigs.namespaces.includes(mw.config.get('wgCanonicalNamespace')))
             return;
