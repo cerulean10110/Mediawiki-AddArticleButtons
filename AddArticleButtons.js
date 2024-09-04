@@ -25,7 +25,7 @@ class AddArticleButtons {
      * 
      * @param {Element} element 
      */
-    DuplicateButton (element) {
+    DuplicateButton(element, newLabel, newTitle) {
         let newItem = element.cloneNode(true);
         element.after(newItem);
 
@@ -36,8 +36,8 @@ class AddArticleButtons {
             newItem = linkItem;
         }
 
-        newItem.innerHTML = buttonLabel;
-        newItem.title = buttonTitle;
+        newItem.innerHTML = newLabel;
+        newItem.title = newTitle;
         newItem.style.cursor = 'pointer';
         newItem.accessKey = '';
 
@@ -49,7 +49,7 @@ class AddArticleButtons {
      * @param {ButtonConfigs} buttonConfigs button configs
      */
     AddItem(buttonConfigs) {
-        let newItem = this.DuplicateButton(this.menuitem);
+        let newItem = this.DuplicateButton(this.menuitem, buttonConfigs.buttonLabel, buttonConfigs.buttonTitle);
 
         if (buttonConfigs.namespaces && !buttonConfigs.namespaces.includes(mw.config.get('wgCanonicalNamespace')))
             return;
@@ -58,8 +58,8 @@ class AddArticleButtons {
             return;
 
         try { // 'URL is valid.'
-            newItem.href = new URL(buttonConfigs.callbackOrUrl); 
-        } catch (e) { // 'URL is not valid.'
+            newItem.href = new URL(buttonConfigs.callbackOrUrl);
+        } catch { // 'URL is not valid.'
             newItem.href = 'javascript:;';
             newItem.onclick = buttonConfigs.callbackOrUrl;
             return;
@@ -73,7 +73,7 @@ class AddArticleButtons {
     AddItems(objects) {
         if (objects.length) {
             for (const element of objects) {
-                AddItem(element)
+                this.AddItem(element)
             }
         }
     }
