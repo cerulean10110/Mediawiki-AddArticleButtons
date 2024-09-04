@@ -1,36 +1,33 @@
 /**
- * @typedef {Object} ButtonSettings
- * @property {string} buttonTitle - button title
- * @property {string} buttonLabel - label
- * @property {string} callbackOrUrl - callback or Url for button
+ * @typedef {Object} ButtonConfigs
+ * @property {string} buttonTitle button title
+ * @property {string} buttonLabel label
+ * @property {string} callbackOrUrl callback or Url for button
+ * @property {Array<string>} namespaces namespaces condition
+ * @property {string} contentModel contentModel condition
  */
 
 /**
  * 문서 메뉴에 버튼을 추가하는 기능을 추가합니다.
  *
  * @class AddArticleButtons
- * @typedef {AddArticleButtons}
  */
 class AddArticleButtons {
-
     /**
-     * @constructor
-     * @param {string} selector
+     * @param {string} cssSelector
      */
-    constructor(selector) {
-        this.menuitem = document.querySelector(selector);
+    constructor(cssSelector) {
+        /** @private */
+        this.menuitem = document.querySelector(cssSelector);
     }
 
     /**
-     * Add Button Item
-     *
-     * @param {string} buttonLabel button name
-     * @param {string} buttonTitle button tooltip
-     * @param {string|function} callbackOrUrl your function or url
+     * 
+     * @param {Element} element 
      */
-    AddItem(buttonLabel, buttonTitle, callbackOrUrl) {
-        let newItem = this.menuitem.cloneNode(true);
-        this.menuitem.after(newItem);
+    DuplicateButton (element) {
+        let newItem = element.cloneNode(true);
+        element.after(newItem);
 
         if (newItem.nodeName != "A") {
             newItem.innerHTML = "";
@@ -44,18 +41,34 @@ class AddArticleButtons {
         newItem.style.cursor = 'pointer';
         newItem.accessKey = '';
 
-        try {
-            newItem.href = new URL(callbackOrUrl); // 'If URL is valid'
-        } catch (e) {
-            newItem.href = 'javascript:;'; // 'If URL is inValid'
-            newItem.onclick = callbackOrUrl;
+        return newItem;
+    }
+
+    /**
+     * Add Button Item
+     * @param {ButtonConfigs} buttonConfigs button configs
+     */
+    AddItem(buttonConfigs) {
+        let newItem = DuplicateButton(this.menuitem);
+
+        if (buttonConfigs.namespaces && !buttonConfigs.namespaces.includes(mw.config.get('wgCanonicalNamespace')))
+            return;
+
+        if (buttonConfigs.contentModel && buttonConfigs.contentModel != mw.config.get('wgPageContentModel'))
+            return;
+
+        try { // 'URL is valid.'
+            newItem.href = new URL(buttonConfigs.callbackOrUrl); 
+        } catch (e) { // 'URL is not valid.'
+            newItem.href = 'javascript:;';
+            newItem.onclick = buttonConfigs.callbackOrUrl;
             return;
         }
     };
 
     /**
      * 
-     * @param {Array<ButtonSettings>} objects 
+     * @param {Array<ButtonConfigs>} objects 
      */
     AddItems(objects) {
         if (objects.length) {
