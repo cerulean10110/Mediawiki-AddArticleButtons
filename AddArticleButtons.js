@@ -73,7 +73,7 @@ class AddArticleButtons {
     AddItems(objects) {
         if (objects.length) {
             for (const element of objects) {
-                AddItem(element.buttonTitle, element.buttonLabel, element.callbackOrUrl)
+                AddItem(element)
             }
         }
     }
